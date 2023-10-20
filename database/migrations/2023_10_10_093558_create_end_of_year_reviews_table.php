@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('end_of_year_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('targets_id')->constrained('targets')->onDelete('cascade');
+            $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');
             $table->text('performance_assessment');
             $table->string('score');
             $table->text('comment');

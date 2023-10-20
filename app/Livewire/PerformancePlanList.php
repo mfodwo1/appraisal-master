@@ -4,6 +4,7 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\PerformancePlan;
 use App\Models\Target;
@@ -19,11 +20,8 @@ class PerformancePlanList extends Component
     public $performancePlans;
 
 
-    protected $listeners = [
-        'performancePlanAdded' => 'refreshPerformancePlans',
-        'targetAdded' => 'refreshTargets',
-];
 
+    #[on('performancePlanAdded')]
     public function refreshPerformancePlans(): void
     {
         // Refresh the performance plans data
@@ -69,9 +67,16 @@ class PerformancePlanList extends Component
     public function delete($id): void
     {
         PerformancePlan::find($id)->delete();
-        $this->dispatch('showForm');
     }
 
+    public function deleteTarget($id): void
+    {
+        Target::find($id)->delete();
+    }
+
+    public function refreshOnDelete(){
+
+    }
     public function editTargets($planId)
     {
         $this->resetForm();
@@ -120,7 +125,8 @@ class PerformancePlanList extends Component
         $this->resetForm();
     }
 
-    public function refreshTargets()
+    #[on('targetAdded')]
+    public function refreshTargets(): void
     {
         if ($this->editPlanId) {
             // Get the performance plan and its associated targets

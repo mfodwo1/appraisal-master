@@ -1,7 +1,7 @@
 <div>
     <form wire:submit.prevent="addTarget">
             <label for="newTarget">New Target</label><br>
-            <input type="text" wire:model="newTarget" class="form-control">
+            <input type="text" wire:model="newTarget" class="w-full">
             <div>
                 @error('newTarget') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>

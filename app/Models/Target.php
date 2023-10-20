@@ -20,6 +20,11 @@ class Target extends Model
         return $this->belongsTo(MidYearReview::class);
     }
 
+    public function endofyearreview(): BelongsTo
+    {
+        return $this->belongsTo(EndOfYearReview::class);
+    }
+
 
     use HasFactory;
 }

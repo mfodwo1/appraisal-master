@@ -50,9 +50,22 @@ class User extends Authenticatable
 
 
 
+    public function nonecaoreappraisee()
+    {
+        return $this->hasOne(AnnualAppriasalNoneCore::class);
+    }
+    public function appraisee()
+    {
+        return $this->hasOne(AnnualAppriasalCore::class);
+    }
     public function midYearReviews(): HasMany
     {
         return $this->hasMany(MidYearReview::class);
+    }
+
+    public function endofyearreviews(): HasMany
+    {
+        return $this->hasMany(EndOfYearReview::class);
     }
     public function trainingRecords(): HasOne
     {

@@ -52,8 +52,11 @@
 
                     <!-- Submit button -->
                     <button type="submit" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white">Update</button>
-                    @if (session('success'))
-                        <div class="alert alert-success text-green-700 z-50">Updated</div>
+                    @if (session('message'))
+                        <div class="alert alert-success text-green-700 z-50">{{$message}}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-success text-green-700 z-50">{{$error}}</div>
                     @endif
                 </form>
 
@@ -69,58 +72,6 @@
                         @livewire('appraiser-signature-approval', ['performancePlan' => $performancePlan])
                     @endif
                 </div>
-
-
-
-
-                <div class="flex flex-col overflow-x-auto">
-                    <div class="sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                            <div class="overflow-x-auto">
-                                <table class="table-auto w-full bg-white border-collapse border border-gray-300">
-                                    <thead>
-                                    <tr>
-                                        <th class="px-4 py-2 w-1">NO.</th>
-                                        <th class="px-4 py-2">TARGET</th>
-                                        <th class="px-4 py-2">PERFORMANCE ASSESSMENT</th>
-                                        <th class="px-4 py-2 w-2">WEIGHT OF TARGET</th>
-                                        <th class="px-4 py-2">SCORE</th>
-                                        <th class="px-4 py-2">COMMENTS</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="dynamic-table-body">
-                                    @php
-                                        $rowNumber = 1; // Initialize the row number counter
-                                    @endphp
-                                    @foreach ($targets as $target)
-                                        <tr>
-                                            <td class="bg-gray-100 pl-3">{{ $rowNumber }}</td>
-                                            <td class="bg-gray-100"><textarea wire:model="target" type="text" cols="50" rows="1" class="w-full p-2 ">{{ $target->target }}</textarea>
-                                                @error('target1') <span class="error text-red-600 block">{{ $message }}</span> @enderror
-                                            </td>
-                                            <td class="bg-gray-100"><textarea wire:model="performanceAssessment" type="text" cols="50" rows="1" class="w-full p-2 "></textarea>
-                                                @error('performanceAssessment1') <span class="error text-red-600 block">{{ $message }}</span> @enderror
-                                            </td>
-                                            <td class="bg-gray-100"><textarea type="text" cols="20" rows="1" class="w-full p-2 " readonly>5</textarea>
-                                            </td>
-                                            <td class="bg-gray-100"><textarea wire:model="score" type="text" cols="50" rows="1" class="w-full p-2 "></textarea>
-                                                @error('score1') <span class="error text-red-600 block">{{ $message }}</span> @enderror
-                                            </td>
-                                            <td class="bg-gray-100"><textarea wire:model="comment" type="text" cols="50" rows="1" class="w-full p-2 "></textarea>
-                                                @error('comment1') <span class="error text-red-600 block">{{ $message }}</span> @enderror
-                                            </td>
-                                        </tr>
-                                        @php
-                                            $rowNumber++; // Increment the row number
-                                        @endphp
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

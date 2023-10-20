@@ -20,14 +20,14 @@
                                 <tr>
                                     <td class="p-2 border-b border-gray-300">
                                         @if ($editMode && $editPlanId === $plan->id)
-                                            <input wire:model="keyResultArea" type="text">
+                                            <input wire:model="keyResultArea" type="text" class="w-full">
                                         @else
                                             {{ $plan->key_result_area }}
                                         @endif
                                     </td>
                                     <td class="px-2 py-2 border-b border-gray-300">
                                         @if ($editMode && $editPlanId === $plan->id)
-                                            <input wire:model="resourceRequired" type="text">
+                                            <input wire:model="resourceRequired" type="text" class="w-full">
                                         @else
                                             {{ $plan->resource_required }}
                                         @endif
@@ -35,7 +35,10 @@
                                     <td class="px-2 py-2 border-b border-gray-300">
                                         @foreach ($plan->targets as $target)
                                             @if ($editTargetMode && $editPlanId === $plan->id)
-                                                <input wire:model="editedTargets.{{ $target->id }}" type="text"><br>
+                                                <div class="flex ">
+                                                    <input wire:model="editedTargets.{{ $target->id }}" type="text" class="w-full"><br>
+                                                    <button wire:click="deleteTarget({{ $target->id }})" type="submit" class="px-2 py-2 rounded-full text-red-500 ml-2"><i class="fas fa-trash"></i></button>
+                                                </div>
                                             @else
                                                 {{ $target->target }}<br>
                                             @endif
@@ -57,7 +60,7 @@
                                         @else
                                             <div>
                                             <button wire:click="edit({{ $plan->id }})" type="submit" class=" px-2 py-2 rounded-full text-blue-500"><i class="fas fa-edit"></i></button>
-                                            <button wire:click="delete({{ $plan->id }})" type="submit" class="px-2 py-2 rounded-full text-blue-500 ml-2"><i class="fas fa-trash"></i></button>
+                                            <button wire:click="delete({{ $plan->id }})" type="submit" class="px-2 py-2 rounded-full text-red-500 ml-2"><i class="fas fa-trash"></i></button>
                                             <span>Plan</span>
                                             </div>
                                             <button wire:click="editTargets({{ $plan->id }})" type="submit" class="px-2 py-2 rounded-full text-blue-500 mt-2"><i class="fas fa-edit"></i></button>

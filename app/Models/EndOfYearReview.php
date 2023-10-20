@@ -12,11 +12,18 @@ class EndOfYearReview extends Model
         'targets_id',
         'score',
         'comment',
+        'appraisee_id',
+        'performance_assessment',
     ];
 
     public function target()
     {
         return $this->belongsTo(Target::class);
+    }
+
+    public function appraisee()
+    {
+        return $this->belongsTo(User::class, 'appraisee_id');
     }
 
     use HasFactory;

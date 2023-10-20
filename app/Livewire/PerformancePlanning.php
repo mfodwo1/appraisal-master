@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Target;
 use App\Models\User;
 use Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\PerformancePlan;
 

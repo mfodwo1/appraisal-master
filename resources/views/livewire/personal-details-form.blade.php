@@ -148,14 +148,17 @@
     @livewire('mid-year-review-form')
 
     {{--End of year review--}}
-    @livewire('end-of-year-review')
+    @livewire('end-of-year-review-from')
 {{--    @include('forms.end-of-year-review')--}}
 
     {{--    Annual appraisal--}}
-    @include('forms.annual-appraisal')
+    @livewire('annual-appriasal-core-form')
+    @livewire('annual-appriasal-none-core-form')
 
 {{--Career developtment--}}
     @include('forms.career-development')
+
+
 
 {{--  Assessment dercision--}}
     @include('forms.assessment-decision')
