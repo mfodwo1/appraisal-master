@@ -9,6 +9,7 @@ use App\livewire;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,4 +43,8 @@ Route::middleware([
     Route::post('/user-details-form/update', PersonalDetailsForm::class)
         ->middleware(['web', 'auth'])
         ->name('user-details-form.update');
+
+    Route::view('/unauthorized', 'unauthorized')->name('unauthorized');
+
+
 });

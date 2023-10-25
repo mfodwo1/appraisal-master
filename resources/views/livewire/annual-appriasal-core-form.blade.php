@@ -13,7 +13,7 @@
                                 @endif
 
                                 @if (session()->has('error'))
-                                    <div class="alert alert-success text-green-700 z-50">{{ session('error') }}</div>
+                                    <div class="alert alert-success text-red-500 z-50">{{ session('error') }}</div>
                                 @endif
 
                                 <div class="overflow-x-auto">
@@ -42,29 +42,33 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="plan" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="plan" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="plan">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('plan') <span class="error text-red-600 block">{{ $message }}</span> @enderror
 
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio" wire:model="work" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio" wire:model="work" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="work">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('work') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio" wire:model="manage" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio" wire:model="manage" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="manage">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('manage') <span class="error text-red-600 block">{{ $message }}</span> @enderror
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -91,28 +95,33 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="change" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="change" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="change">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('change') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="creativity" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="creativity" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="creativity">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('creativity') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="thinking" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="thinking" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="thinking">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('thinking') <span class="error text-red-600 block">{{ $message }}</span> @enderror
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -139,28 +148,34 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="direction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="direction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="direction">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('direction') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="decision_making" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="decision_making" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="decision_making">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('decision_making') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="judgment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="judgment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="judgment">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('judgment') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -174,11 +189,6 @@
                                                         Average: <span>{{$decision_making_average}}</span>
                                                     </td>
                                                 </tr>
-
-
-
-
-                                    {{--        Yet to work on             --}}
                                                 <tr>
                                                     <td class="py-2">
                                                         <h5 class="font-semibold">(iv) Developing and Improving</h5>
@@ -192,28 +202,34 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="organizationDevelopment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="organizationDevelopment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="organizationDevelopment">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('organizationDevelopment') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="satisfaction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="satisfaction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="satisfaction">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('satisfaction') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="personnelDevelopment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="personnelDevelopment" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="personnelDevelopment">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('personnelDevelopment') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -240,28 +256,33 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="communicateDecision" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="communicateDecision" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="communicateDecision">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('communicateDecision') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="negotiate" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="negotiate" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="negotiate">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('negotiate') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="network" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="network" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="network">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('network') <span class="error text-red-600 block">{{ $message }}</span> @enderror
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -288,28 +309,34 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="manualSkill" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="manualSkill" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="manualSkill">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('manualSkill') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="crossFunctionalAwareness" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="crossFunctionalAwareness" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="crossFunctionalAwareness">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('crossFunctionalAwareness') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="expertise" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="expertise" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="expertise">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('expertise') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -336,28 +363,34 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="teamWork" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="teamWork" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="teamWork">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('teamWork') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="showSupport" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="showSupport" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="showSupport">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('showSupport') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="adherePrinciple" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="adherePrinciple" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="adherePrinciple">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('adherePrinciple') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                     </td>
                                                     <td class="py-2">
                                                         <br>
@@ -384,24 +417,26 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="inspireOther" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="inspireOther" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="inspireOther">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
+                                                        @error('inspireOther') <span class="error text-red-600 block">{{ $message }}</span> @enderror
+
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="confidence" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="confidence" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="confidence">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="managePressure" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="managePressure" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="managePressure">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
@@ -432,24 +467,24 @@
                                                         <br>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="accountability" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="accountability" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="accountability">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="businessProcesses" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="businessProcesses" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="businessProcesses">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                         <div class="flex space-x-1">
                                                             @foreach(range(1, 5) as $value)
-                                                                <div class="form-check">
-                                                                    <input class="form-radio" type="radio"  wire:model="resultBasedAction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
+                                                                <div>
+                                                                    <input  type="radio"  wire:model="resultBasedAction" value="{{ $value }}" wire:change="calculateCoreCompetencies">
                                                                     <label class="ml-2" for="resultBasedAction">{{ $value }}</label>
                                                                 </div>
                                                             @endforeach

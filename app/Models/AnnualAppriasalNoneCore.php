@@ -9,6 +9,7 @@ class AnnualAppriasalNoneCore extends Model
 {
     protected $fillable=[
         'appraisee_id',
+        'appraiser_id',
         'develop_other',
         'provide_guidance',
         'self_development',
@@ -23,9 +24,14 @@ class AnnualAppriasalNoneCore extends Model
         'work_in_team',
     ];
 
-    public function nonecaoreappraisee()
+    public function nonecoreappraisee()
     {
-        return $this->belongsTo(User::class, 'appraisee_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function nonecoreappraiser()
+    {
+        return $this->belongsTo(User::class);
     }
 
     use HasFactory;

@@ -49,12 +49,17 @@ class User extends Authenticatable
     ];
 
 
+    public function appraisercomment()
+    {
+        return $this->hasOne(AppraiserComment::class);
+    }
 
-    public function nonecaoreappraisee()
+    public function nonecoreappraisee(): HasOne
     {
         return $this->hasOne(AnnualAppriasalNoneCore::class);
     }
-    public function appraisee()
+
+    public function annualappraisalappraisee()
     {
         return $this->hasOne(AnnualAppriasalCore::class);
     }
@@ -90,6 +95,16 @@ class User extends Authenticatable
     public function competency(): HasMany
     {
         return $this->hasMany(Competency::class);
+    }
+
+    public function appraiser(): HasOne
+    {
+        return $this->hasOne(Department::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
 

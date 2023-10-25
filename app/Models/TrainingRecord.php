@@ -11,17 +11,15 @@ class TrainingRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'appraisee_id',
+        'appraiser_id',
         'institution',
-        'institution2',
-        'institution3',
         'training_date',
-        'training_date2',
-        'training_date3',
     ];
 
-    public function user(): BelongsTo
+    public function trainingRecords(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
 }

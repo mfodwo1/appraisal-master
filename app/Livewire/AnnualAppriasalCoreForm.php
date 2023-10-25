@@ -245,7 +245,7 @@ class AnnualAppriasalCoreForm extends Component
 
     public function submitForm()
     {
-        try {
+
             $this->validate([
                 'plan' => 'required|integer',
                 'work' => 'required|integer',
@@ -276,7 +276,9 @@ class AnnualAppriasalCoreForm extends Component
                 'resultBasedAction' => 'required|integer',
             ]);
 
+        try {
             $userId = Auth::id();
+            $user = Auth::user();
             // Begin a database transaction
             \DB::beginTransaction();
 
@@ -285,10 +287,19 @@ class AnnualAppriasalCoreForm extends Component
                 ->whereYear('created_at', now()->year)
                 ->first();
 
+            //Fetch user's appraisee
+            $appraiser = $user::where('department_id', $user->department_id)
+                ->where('user_type', 'Appraiser')
+                ->first();
+            if ($appraiser) {
+                $appraiserId = $appraiser->id;
+            } else {
+                session()->flash('error', 'You do not have appraiser');
+            }
+
             if ($existingRecord) {
                 // If a record for the current year exists, update it
                 $existingRecord->update([
-                    'appraisee_id' => Auth::id(),
                     'plan' => $this->plan,
                     'work' => $this->work,
                     'manage' => $this->manage,
@@ -321,6 +332,7 @@ class AnnualAppriasalCoreForm extends Component
                 // If no record for the current year exists, create a new one
                 $annualAppriasalCore = AnnualAppriasalCore::create([
                     'appraisee_id' => Auth::id(),
+                    'appraiser_id' => $appraiserId,
                     'plan' => $this->plan,
                     'work' => $this->work,
                     'manage' => $this->manage,

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Foreign key to associate with users table
+            $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');;
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->text('appraiser_comments');
             $table->text('appraisee_comments');
             $table->text('hod_comments');

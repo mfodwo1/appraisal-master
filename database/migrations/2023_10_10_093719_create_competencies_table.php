@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('competencies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->string('competency');
             $table->text('competency_progress_review');
             $table->text('competency_remarks');

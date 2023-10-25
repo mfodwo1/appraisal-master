@@ -9,6 +9,7 @@ class AnnualAppriasalCore extends Model
 {
     protected $fillable = [
         'appraisee_id',
+        'appraiser_id',
         'plan',
         'work',
         'manage',
@@ -38,8 +39,8 @@ class AnnualAppriasalCore extends Model
         'result_based_action',
     ];
 
-    public function appraisee()
+    public function annualappraisalappraisee()
     {
-        return $this->belongsTo(User::class, 'appraisee_id');
+        return $this->belongsTo(User::class);
     }
 }

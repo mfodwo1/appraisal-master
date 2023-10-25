@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('annual_appriasal_none_cores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->string('develop_other');
             $table->string('provide_guidance');
             $table->string('self_development');

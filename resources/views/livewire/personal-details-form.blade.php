@@ -36,10 +36,13 @@
                             <span class="ml-2">Ms.</span>
                         </label>
                         <label class="inline-flex items-center">
+                            <input wire:model="title" type="radio" class="form-radio" value="Other" >
                             <span class="ml-2">Other (Pls. specify):</span>
-                            <input wire:model="title" type="text">
                         </label>
+                        <input wire:model="title" type="text" class="w-16 h-6">
+
                     </div>
+
                     @error('title') <span class="error text-red-600 block">{{ $message }}</span> @enderror
                 </div>
                 <div>

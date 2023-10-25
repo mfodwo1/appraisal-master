@@ -6,6 +6,7 @@
             <!-- Styles -->
 
             @livewire('appraiser-details')
+            @livewire('display-appraisee-info')
 
         </div>
     </div>

@@ -26,7 +26,7 @@ class EndOfYearReviewFrom extends Component
             ]);
 
             // Get the currently authenticated user's ID
-            $userId = Auth::id();
+            $user = Auth::user();
 
             // Begin a database transaction
             \DB::beginTransaction();
@@ -40,13 +40,24 @@ class EndOfYearReviewFrom extends Component
                     ->whereYear('created_at', now()->year) // Assuming a 'created_at' timestamp field
                     ->first();
 
+                //Fetch appraiser
+                $appraiser = $user::where('department_id', $user->department_id)
+                    ->where('user_type', 'Appraiser')
+                    ->first();
+                if ($appraiser) {
+                    $appraiserId = $appraiser->id;
+                } else {
+                    session()->flash('error', 'You do not have appraiser');
+                }
+
                 // Prepare the data for the review
                 $reviewData = [
                     'performance_assessment' => $targetData['performanceAssessment'],
                     'score' => $targetData['score'],
                     'comment' => $targetData['comment'],
                     'targets_id' => $targetId,
-                    'appraisee_id' => $userId,
+                    'appraisee_id' => $user->id,
+                    'appraiser_id' => $appraiserId,
                 ];
 
                 if ($existingReview) {

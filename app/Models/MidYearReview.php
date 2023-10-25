@@ -12,6 +12,7 @@ class MidYearReview extends Model
         'targets_progress_review',
         'targets_remarks',
         'appraisee_id',
+        'appraiser_id',
 
     ];
 

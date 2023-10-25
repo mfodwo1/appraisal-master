@@ -53,10 +53,11 @@
                     <!-- Submit button -->
                     <button type="submit" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white">Update</button>
                     @if (session('message'))
-                        <div class="alert alert-success text-green-700 z-50">{{$message}}</div>
+                        <div class="alert alert-success text-green-700 z-50">{{ session('message') }}</div>
                     @endif
+
                     @if (session('error'))
-                        <div class="alert alert-success text-green-700 z-50">{{$error}}</div>
+                        <div class="alert alert-success text-green-700 z-50">{{ session('error') }}</div>
                     @endif
                 </form>
 

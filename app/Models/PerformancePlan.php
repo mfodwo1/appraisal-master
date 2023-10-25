@@ -22,17 +22,17 @@ class PerformancePlan extends Model
 
     public function appraisee(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'appraisee_id');
+        return $this->belongsTo(User::class);
     }
 
     public function appraiser(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'appraiser_id');
+        return $this->belongsTo(User::class);
     }
 
     public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'appraiser_id');
+        return $this->belongsTo(Department::class);
     }
     public function targets()
     {

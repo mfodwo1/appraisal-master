@@ -11,13 +11,13 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'appraiser_comments',
+
         'appraisee_comments',
         'hod_comments',
-        'appraiser_sign',
+
         'appraisee_sign',
         'hod_sign',
-        'appraiser_sign_date',
+
         'appraisee_sign_date',
         'hod_sign_date',
     ];

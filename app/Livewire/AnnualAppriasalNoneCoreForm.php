@@ -150,19 +150,28 @@ class AnnualAppriasalNoneCoreForm extends Component
     {
 //        try {
             $validated = $this->validate();
-            $userId = Auth::id();
+            $user = Auth::user();
             // Begin a database transaction
             \DB::beginTransaction();
 
             // Check if the user has already submitted a review for the current year
-            $existingRecord = AnnualAppriasalNoneCore::where('appraisee_id', $userId)
+            $existingRecord = AnnualAppriasalNoneCore::where('appraisee_id', $user->id)
                 ->whereYear('created_at', now()->year)
                 ->first();
+
+        //Fetch appraiser
+        $appraiser = $user::where('department_id', $user->department_id)
+            ->where('user_type', 'Appraiser')
+            ->first();
+        if ($appraiser) {
+            $appraiserId = $appraiser->id;
+        } else {
+            session()->flash('error', 'You do not have appraiser');
+        }
 
             if ($existingRecord) {
                 // If a record for the current year exists, update it
                 $existingRecord->update([
-                    'appraisee_id' => Auth::id(),
                     'develop_other'=> $validated['developOther'],
                     'provide_guidance' => $validated['provideGuidance'],
                     'self_development' => $validated['supplementTraining'],
@@ -180,6 +189,7 @@ class AnnualAppriasalNoneCoreForm extends Component
                 // If no record for the current year exists, create a new one
                 $annualAppriasalCore = AnnualAppriasalNoneCore::create([
                     'appraisee_id' => Auth::id(),
+                    'appraiser_id' => $appraiserId,
                     'develop_other'=> $validated['developOther'],
                     'provide_guidance' => $validated['provideGuidance'],
                     'self_development' => $validated['supplementTraining'],

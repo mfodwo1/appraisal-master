@@ -19,6 +19,10 @@ class Department extends Model
     {
         return $this->belongsTo(User::class, 'appraiser_id');
     }
+    public function department()
+    {
+        return $this->hasOne(User::class, );
+    }
 
     public function hod()
     {

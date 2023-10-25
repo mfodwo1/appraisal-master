@@ -2,80 +2,126 @@
 
 namespace App\Livewire;
 
+use App\Models\TrainingRecord;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+
 
 class TrainingRecords extends Component
 {
-    public $institution;
-    public $institution2;
-    public $institution3;
-    public $trainingDate;
-    public $trainingDate2;
-    public $trainingDate3;
-    public $trainingRecord;
+    public $institutions = [];
+    public $editedInstitution = [
+        'name' => '',
+        'date' => '',
+    ];
+    public $editIndex = null;
+
+    protected $listeners = [
+        'TrainingRecordCreated' => 'refreshTrainingRecords',
+    ];
+    public function refreshTrainingRecords(){
+        $this->updateInstitutions();
+    }
 
     public function mount()
     {
-        // Fetch the user's existing training record, if it exists
-        $this->trainingRecord = auth()->user()->trainingRecords()->whereYear('created_at', now()->year)->first();
-
-        // Pre-fill the form fields if a record exists
-        if ($this->trainingRecord) {
-            $this->institution = $this->trainingRecord->institution;
-            $this->trainingDate = date('Y-m-d', strtotime($this->trainingRecord->training_date));
-            $this->institution2 = $this->trainingRecord->institution2;
-            $this->trainingDate2 = date('Y-m-d', strtotime($this->trainingRecord->training_date2));
-            $this->institution3 = $this->trainingRecord->institution3;
-            $this->trainingDate3 = date('Y-m-d', strtotime($this->trainingRecord->training_date3));
-
-        }
+        $this->updateInstitutions();
     }
 
     public function submitForm()
     {
-        // Validate the form data
-        $this->validate([
-            'institution' => 'required|string|max:255',
-            'institution2' => 'nullable|string|max:255',
-            'institution3' => 'nullable|string|max:255',
-            'trainingDate' => 'required|date',
-            'trainingDate2' => 'nullable|date',
-            'trainingDate3' => 'nullable|date',
-        ]);
+        // Validation rules for edited institution
+        $rules = [
+            'editedInstitution.name' => 'required|string|max:255',
+            'editedInstitution.date' => 'required|date',
+        ];
 
+        // Custom validation messages (optional)
+        $messages = [
+            'editedInstitution.name.required' => 'The institution name is required.',
+            'editedInstitution.date.required' => 'The date is required.',
+        ];
 
-        // Find the authenticated user
-        $user = auth()->user();
+        $validator = Validator::make($this->editedInstitution, $rules, $messages);
 
-        // Check if the user already has a training record for the current year
-        $existingRecord = $user->trainingRecords()->whereYear('created_at', now()->year)->first();
-
-        if ($existingRecord) {
-            // Update the existing record
-            $existingRecord->update([
-                'institution' => $this->institution,
-                'institution2' => $this->institution2,
-                'institution3' => $this->institution3,
-                'training_date' => $this->trainingDate,
-                'training_date2' => $this->trainingDate2,
-                'training_date3' => $this->trainingDate3,
-            ]);
+        if ($validator->fails()) {
+            $this->addError('editedInstitution.name', $validator->errors()->first('editedInstitution.name'));
+            $this->addError('editedInstitution.date', $validator->errors()->first('editedInstitution.date'));
         } else {
-            // Create a new record
-            $user->trainingRecords()->create([
-                'institution' => $this->institution,
-                'institution2' => $this->institution2,
-                'institution3' => $this->institution3,
-                'training_date' => $this->trainingDate,
-                'training_date2' => $this->trainingDate2,
-                'training_date3' => $this->trainingDate3,
-            ]);
+            $this->saveEditedInstitution();
         }
 
-
-        // Optionally, you can emit an event or display a success message here
-        session()->flash('success', 'Training record submitted successfully!');
     }
+
+    public function saveEditedInstitution()
+    {
+        try {
+            if ($this->editIndex !== null) {
+                TrainingRecord::where('id', $this->institutions[$this->editIndex]['id'])->update([
+                    'institution' => $this->editedInstitution['name'],
+                    'training_date' => $this->editedInstitution['date'],
+                ]);
+                $this->editIndex = null;
+                $this->updateInstitutions();
+            }
+            // Commit the database transaction
+            \DB::commit();
+
+            // Provide feedback to the user
+            session()->flash('message', 'Training record added successfully');
+        } catch (\Exception $e) {
+            // Handle any database or other exceptions
+            \DB::rollback(); // Rollback the transaction in case of an exception
+            session()->flash('error', 'An error occurred while submitting the reviews');
+        }
+    }
+
+    public function editInstitution($index)
+    {
+        $this->editIndex = $index;
+        $this->editedInstitution = [
+            'name' => $this->institutions[$index]['institution'],
+            'date' => $this->institutions[$index]['training_date'],
+        ];
+    }
+
+    public function cancelEdit()
+    {
+        $this->editIndex = null;
+    }
+
+    public function removeInstitution($index)
+    {
+        TrainingRecord::where('id', $this->institutions[$index]['id'])->delete();
+        $this->updateInstitutions();
+    }
+
+    public function addInstitution()
+    {
+        $this->validate([
+            'editedInstitution.name' => 'required|string|max:255',
+            'editedInstitution.date' => 'required|date',
+        ]);
+
+        TrainingRecord::create([
+            'appraisee_id' => auth()->id(),
+            'appraiser_id' => auth()->id(),
+            'institution' => $this->editedInstitution['name'],
+            'training_date' => $this->editedInstitution['date'],
+        ]);
+
+        $this->editedInstitution = ['name' => '', 'date' => ''];
+
+        $this->updateInstitutions();
+
+    }
+
+    public function updateInstitutions()
+    {
+        $this->institutions = TrainingRecord::where('appraisee_id', auth()->id())->get();
+    }
+
 
     public function render()
     {

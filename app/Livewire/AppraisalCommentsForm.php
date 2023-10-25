@@ -15,20 +15,20 @@ class AppraisalCommentsForm extends Component
 
     public function render()
     {
-        // Check if the user has already submitted a comment for the current year
-        $user = Auth::user();
-        $currentYear = now()->year;
-
-        $existingComment = $user->Comment()
-            ->whereYear('created_at', $currentYear)
-            ->first();
-
-        if ($existingComment) {
-            // If a comment exists for the current year, pre-fill the form
-            $this->comments = $existingComment->comments;
-            $this->appraiserDate = $existingComment->appraiser_date;
-            // You can also pre-fill the appraiserSignature field if needed
-        }
+//        // Check if the user has already submitted a comment for the current year
+//        $user = Auth::user();
+//        $currentYear = now()->year;
+//
+//        $existingComment = $user->Comment()
+//            ->whereYear('created_at', $currentYear)
+//            ->first();
+//
+//        if ($existingComment) {
+//            // If a comment exists for the current year, pre-fill the form
+//            $this->comments = $existingComment->comments;
+//            $this->appraiserDate = $existingComment->appraiser_date;
+//            // You can also pre-fill the appraiserSignature field if needed
+//        }
 
         return view('livewire.appraisee.appraisal-comments-form');
     }

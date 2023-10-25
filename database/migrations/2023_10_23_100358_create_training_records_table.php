@@ -9,11 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('training_records', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');;
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->string('institution');
             $table->date('training_date');
             $table->string('institution2')->nullable();
@@ -21,12 +22,13 @@ return new class extends Migration
             $table->string('institution3')->nullable();
             $table->date('training_date3')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('training_records');
     }

@@ -74,6 +74,7 @@ class PerformancePlanning extends Component
         $user = User::find($userId);
         $department = Department::find($user->department_id);
 
+
         // Check if the user has already submitted a Performance plan for the current year
         $existingPerformancePlan = PerformancePlan::where('appraisee_id', $userId)->whereYear('created_at', now()->year)->first();
 
@@ -89,9 +90,9 @@ class PerformancePlanning extends Component
             // Create a new PerformancePlan record with the appraiser ID
             $performancePlan = PerformancePlan::create([
                 'appraisee_id' => $userId,
+                'appraiser_id' => $appraiserId,
                 'key_result_area' => $this->keyResultArea,
                 'resource_required' => $this->resourceRequired,
-                'appraiser_id' => $appraiserId, // Set the appraiser ID from the department
                 'department_id'=>$departmentId,
             ]);
 

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('performance_planning_forms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Foreign key reference to users table
+            $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');;
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->text('key_result_area');
             $table->text('target_1');
             $table->text('target_2')->nullable();
@@ -32,7 +33,6 @@ return new class extends Migration
             $table->boolean('appraisee_approve')->default(0);
             $table->boolean('appraiser_approve')->default(0);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
     }

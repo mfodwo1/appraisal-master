@@ -10,15 +10,20 @@ class Competency extends Model
 {
 
     protected $fillable = [
-        'user_id',
+        'appraisee_id',
+        'appraiser_id',
         'competency',
         'competency_progress_review',
         'competency_remarks',
     ];
 
-    public function user(): BelongsTo
+    public function appraisee(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'appraisee_id');
+    }
+    public function appraiser()
+    {
+        return $this->belongsTo(User::class, 'appraiser_id');
     }
 
 //    use HasFactory;

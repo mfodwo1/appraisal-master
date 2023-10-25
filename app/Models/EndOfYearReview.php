@@ -13,6 +13,7 @@ class EndOfYearReview extends Model
         'score',
         'comment',
         'appraisee_id',
+        'appraiser_id',
         'performance_assessment',
     ];
 
@@ -23,7 +24,11 @@ class EndOfYearReview extends Model
 
     public function appraisee()
     {
-        return $this->belongsTo(User::class, 'appraisee_id');
+        return $this->belongsTo(User::class);
+    }
+    public function appraiser()
+    {
+        return $this->belongsTo(User::class);
     }
 
     use HasFactory;

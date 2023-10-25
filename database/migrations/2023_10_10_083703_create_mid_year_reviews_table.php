@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mid_year_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appraisee_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('appraiser_id')->constrained('users');
             $table->text('targets_progress_review');
             $table->text('targets_remarks');
             $table->timestamps();
