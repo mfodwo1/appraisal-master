@@ -2,7 +2,7 @@
 
 @if ($appraiserSignature) <!-- Check if the collection is not empty -->
         <div>
-            <img src="{{ 'storage/'.$appraiserSignature }}" alt="Appraisee's Signature" class="w-48">
+            <img src="{{ '../storage/'.$appraiserSignature }}" alt="Appraiser's Signature" class="w-48">
             <p>Appraisee has approved.</p>
 
         </div>

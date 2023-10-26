@@ -1,15 +1,13 @@
 <?php
 
 
-namespace App\Livewire;
+namespace App\Livewire\Appraisee;
 
 use App\Models\Department;
-use App\Models\Target;
+use App\Models\PerformancePlan;
 use App\Models\User;
 use Auth;
-use Livewire\Attributes\On;
 use Livewire\Component;
-use App\Models\PerformancePlan;
 
 // Adjust this to your model
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraisee;
 
 use App\Models\Target;
 use Livewire\Component;

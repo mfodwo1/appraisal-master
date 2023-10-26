@@ -49,7 +49,7 @@
                 @endforeach
 {{--                    <button type="submit" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white hover:bg-blue-800">Submit</button>--}}
                 </form>
-                @livewire('add-new-training-record')
+                @livewire('appraisee.add-new-training-record')
             </div>
         </div>
     </div>

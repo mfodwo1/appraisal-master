@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraiser;
 
 use App\Models\PerformancePlan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class AppraiserSignatureApproval extends Component
+class AppraiseeSignatureApproval extends Component
 {
+    public $userId;
     public  $performancePlanItem;
-    public $appraiserSignature;
+    public $appraiseeSignature;
 
     public function mount()
     {
-        $user = Auth::user();
-        $performancePlanItem = PerformancePlan::where('appraisee_id', $user->id)->where('appraiser_approve', 1)->first();
-        if ($performancePlanItem) {
-            $departmentId = $performancePlanItem->department_id;
-            $appraiser = User::where('department_id', $departmentId)
-                ->where('user_type', 'appraiser')
-                ->first();
-            if ($appraiser) {
-                $this->appraiserSignature = $appraiser->signature;
-            }
+        $appraisee = PerformancePlan::where('appraisee_id', $this->userId)->where('appraisee_approve', 1)->first();
+
+        if ($appraisee) {
+//            $departmentId = $performancePlanItem->department_id;
+//            $appraiser = User::where('department_id', $departmentId)
+//                ->where('user_type', 'appraiser')
+//                ->first();
+//            if ($appraiser) {
+                $this->appraiseeSignature = User::where('id', $this->userId)->pluck('signature')->first();
+//            }
         }
     }
 
@@ -32,7 +33,7 @@ class AppraiserSignatureApproval extends Component
 
     public function render()
     {
-        return view('livewire.appraiser-signature-approval');
+        return view('livewire.appraiser.appraisee-signature-approval');
     }
 
 
@@ -52,7 +53,7 @@ class AppraiserSignatureApproval extends Component
 //use Livewire\Component;
 //use Illuminate\Support\Facades\Auth;
 //
-//class AppraiserSignatureApproval extends Component
+//class AppraiseeSignatureApproval extends Component
 //{
 //    public $performancePlan;
 //

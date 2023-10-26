@@ -1,16 +1,17 @@
 <?php
 
 
-namespace App\Livewire;
+namespace App\Livewire\Appraiser;
 
+use App\Models\PerformancePlan;
+use App\Models\Target;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use App\Models\PerformancePlan;
-use App\Models\Target;
 
 class PerformancePlanList extends Component
 {
+    public $userId;
     public $editMode = false;
     public $editPlanId;
     public $editTargetMode = false;
@@ -25,14 +26,12 @@ class PerformancePlanList extends Component
     public function refreshPerformancePlans(): void
     {
         // Refresh the performance plans data
-        $user = Auth::user();
-        $this->performancePlans = PerformancePlan::where('appraisee_id', $user->id)->with('targets')->get();
+        $this->performancePlans = PerformancePlan::where('appraiser_id', $this->userId)->with('targets')->get();
     }
 
     public function render()
     {
-        $user = Auth::user();
-        $this->performancePlans = PerformancePlan::where('appraisee_id', $user->id)->with('targets')->get();
+        $this->performancePlans = PerformancePlan::where('appraisee_id', $this->userId)->with('targets')->get();
         return view('livewire.appraisee.performance-plan-list');
     }
 

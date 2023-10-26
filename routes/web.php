@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\Appraiser\DisplayAppraiserDetailController;
+use App\Http\Controllers\Appraiser\AppraiseeListController;
+use App\Http\Controllers\Appraiser\ShowAppraiseeDetails;
 use App\Http\Controllers\HomeController;
-use App\Livewire\PersonalDetailsForm;
+use App\Livewire\Appraisee\PersonalDetailsForm;
+use App\Livewire\Calendar;
 use Illuminate\Support\Facades\Route;
-use App\livewire;
-
-
-
-
 
 
 /*
@@ -46,5 +45,13 @@ Route::middleware([
 
     Route::view('/unauthorized', 'unauthorized')->name('unauthorized');
 
+
+    Route::get('/user-details/{userId}', [ShowAppraiseeDetails::class , 'showDetails'])->name('user.details')
+        ->middleware(['web', 'auth', 'AppraiserMiddleware']);
+
+    Route::get('/appraisee/list', [AppraiseeListController::class , 'showForm'])->name('user.list')
+        ->middleware(['web', 'auth', 'AppraiserMiddleware']);
+
+    Livewire::component('calendar', Calendar::class);
 
 });

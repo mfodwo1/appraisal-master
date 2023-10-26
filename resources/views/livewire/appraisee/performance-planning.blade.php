@@ -11,7 +11,7 @@
 
                 <!-- Key Result Area and Resources Required -->
                 <div class="mb-5">
-                    @livewire('performance-plan-list')
+                    @livewire('appraisee.performance-plan-list')
 
                     @if (session('success'))
                         <div class="alert alert-success text-green-700 z-50">{{ session('success') }}</div>
@@ -75,12 +75,12 @@
                     <hr class="my-5">
                     <div class="grid grid-cols-2 gap-4">
                         @if(isset($performancePlan))
-                            @livewire('appraisee-signature-approval', ['performancePlan' => $performancePlan])
+                            @livewire('appraisee.appraisee-signature-approval', ['performancePlan' => $performancePlan])
                         @endif
 
                         <!-- Appraiser Signature Approval -->
                         @if(isset($performancePlan))
-                            @livewire('appraiser-signature-approval', ['performancePlan' => $performancePlan])
+                            @livewire('appraisee.appraiser-signature-approval', ['performancePlan' => $performancePlan])
                         @endif
                     </div>
                 </div>

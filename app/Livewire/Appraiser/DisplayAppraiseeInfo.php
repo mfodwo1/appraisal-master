@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraiser;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class DisplayAppraiseeInfo extends Component
     public $appraiser;
     public $appraisees;
     public $selectedAppraiseeId;
-    public $viewMode = 'table';
+
     public $showDetails = false;
 
 
@@ -24,13 +24,8 @@ class DisplayAppraiseeInfo extends Component
 
     public function render()
     {
-        if ($this->viewMode === 'table') {
-            // Render the table view
-            return view('livewire.display-appraisee-info');
-        } else {
-            // Render the details view
-            return view('livewire.appraisee-details');
-        }
+        return view('livewire.appraiser.display-appraisee-info');
+
     }
 
 
@@ -63,18 +58,5 @@ class DisplayAppraiseeInfo extends Component
         $appraisee->save();
         $this->loadAppraisees();
     }
-
-    #[computed()]
-    public function showAppraiseeDetails($appraiseeId)
-    {
-        $this->showDetails = true;
-        return User::find($appraiseeId);
-    }
-
-    public function closeDetails()
-    {
-        $this->showDetails = false;
-    }
-
 
 }

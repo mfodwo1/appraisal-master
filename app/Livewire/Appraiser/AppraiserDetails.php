@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraiser;
 
-use App\Models\User;
 use Illuminate\Support\Carbon;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
 
-class PersonalDetailsForm extends Component
+class AppraiserDetails extends Component
 {
     use withfileuploads;
     public $showForm = false;
@@ -59,7 +58,7 @@ class PersonalDetailsForm extends Component
     public function submit()
     {
         if($this->signature){
-             $filePath = $this->signature->store('uploads', 'public');
+            $filePath = $this->signature->store('uploads', 'public');
         }
         $this->validate([
             // Add validation rules for each form field
@@ -79,25 +78,25 @@ class PersonalDetailsForm extends Component
             $user = Auth::user();
             // Attempt to update the user profile record in the database
 //            try {
-                $user->update([
-                    'title' => $this->title,
-                    'surname' => $this->surname,
-                    'first_name' => $this->firstName,
-                    'other_names' => $this->otherNames,
-                    'gender' => $this->gender,
-                    'grade_salary' => $this->gradeSalary,
-                    'present_job_title' => $this->jobTitlePosition,
+            $user->update([
+                'title' => $this->title,
+                'surname' => $this->surname,
+                'first_name' => $this->firstName,
+                'other_names' => $this->otherNames,
+                'gender' => $this->gender,
+                'grade_salary' => $this->gradeSalary,
+                'present_job_title' => $this->jobTitlePosition,
 //                    'department_division' => $this->departmentDivision,
-                    'date_of_appointment' => $this->dateOfAppointment,
-                ]);
-                if ($this->signature){
-                    $user->update(['signature' => $filePath,]);
-                }
+                'date_of_appointment' => $this->dateOfAppointment,
+            ]);
+            if ($this->signature){
+                $user->update(['signature' => $filePath,]);
+            }
 
 
 
-                // Display a success message
-                session()->flash('message', 'Profile updated successfully.');
+            // Display a success message
+            session()->flash('message', 'Profile updated successfully.');
 //            } catch (\Exception $e) {
 //                // Handle exceptions and display an error message
 //                session()->flash('error', 'An error occurred while updating the profile: ' . $e->getMessage());
@@ -109,6 +108,6 @@ class PersonalDetailsForm extends Component
     }
     public function render()
     {
-        return view('livewire.personal-details-form');
+        return view('livewire.appraiser.appraiser-details');
     }
 }

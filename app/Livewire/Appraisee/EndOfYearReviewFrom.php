@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraisee;
 
-use App\Models\Target;
-use Livewire\Component;
 use App\Models\EndOfYearReview;
+use App\Models\Target;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+
 class EndOfYearReviewFrom extends Component
 {
     public $targets = [];
@@ -145,6 +146,6 @@ class EndOfYearReviewFrom extends Component
 
     public function render()
     {
-        return view('livewire.end-of-year-review-from');
+        return view('livewire.appraisee.end-of-year-review-from');
     }
 }

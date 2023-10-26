@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraisee;
 
-use App\Models\AnnualAppriasalCore;
 use App\Models\AnnualAppriasalNoneCore;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+
 class AnnualAppriasalNoneCoreForm extends Component
 {
     #[Rule('required|integer')]
@@ -67,7 +67,7 @@ class AnnualAppriasalNoneCoreForm extends Component
 
     public function render()
     {
-        return view('livewire.annual-appriasal-none-core-form');
+        return view('livewire.appraisee.annual-appriasal-none-core-form');
     }
 
     public function mount()

@@ -33,7 +33,8 @@
                                             <td>{{ $appraisee->gender }}</td>
                                             <td>{{ $appraisee->department->department_name }}</td>
                                             <td>
-                                                <button wire:click="showAppraiseeDetails({{ $appraisee->id }})" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white">View Detail</button>
+                                                <a href="{{ route('user.details', ['userId' => $appraisee->id]) }}" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white">View Detail</a>
+{{--                                                <button wire:click="showAppraiseeDetails({{ $appraisee->id }})" class="bg-blue-500 mt-5 p-2 rounded-3xl text-white">View Detail</button>--}}
                                             @if ($appraisee->appraisal_status === 1)
                                                     <button wire:click="markNotComplete({{ $appraisee->id }})" class="bg-green-700 mt-5 p-2 rounded-3xl text-white">Complete</button>
                                                 @else
@@ -46,10 +47,10 @@
                                 </table>
                             </div>
 
-                            @if ($showDetails)
-                            @livewire('appraisee-details')
-                            <button wire:click="closeDetails">Close</button>
-                             @endif
+{{--                            @if ($showDetails)--}}
+{{--                            @livewire('appraisee-details')--}}
+{{--                            <button wire:click="closeDetails">Close</button>--}}
+{{--                             @endif--}}
                         </div>
                     </div>
                 </div>

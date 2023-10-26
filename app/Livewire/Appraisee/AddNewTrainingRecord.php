@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraisee;
 
 use App\Models\TrainingRecord;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +70,6 @@ class AddNewTrainingRecord extends Component
     }
     public function render()
     {
-        return view('livewire.add-new-training-record');
+        return view('livewire.appraisee.add-new-training-record');
     }
 }

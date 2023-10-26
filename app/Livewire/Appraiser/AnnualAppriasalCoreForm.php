@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Appraiser;
 
 use App\Models\AnnualAppriasalCore;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AnnualAppriasalCoreForm extends Component
 {
+    public $userId;
     public $plan;
     public $work;
     public $manage;
@@ -103,25 +105,15 @@ class AnnualAppriasalCoreForm extends Component
 
     public function render()
     {
-        return view('livewire.annual-appriasal-core-form');
+        return view('livewire.appraiser.annual-appriasal-core-form');
     }
 
     public function mount()
     {
-//        $user = Auth::user();
-//        $currentYear = now()->year;
-        // Get the currently authenticated user's ID
-        $userId = Auth::id();
-
         // Check if the user has already submitted a review for the current year
-        $existingRecord = AnnualAppriasalCore::where('appraisee_id', $userId)
+        $existingRecord = AnnualAppriasalCore::where('appraisee_id', $this->userId)
             ->whereYear('created_at', now()->year)
             ->first();
-
-//        // Check if the user has already submitted a form for the current year
-//        $existingRecord = $user->appraisee()
-//            ->whereYear('created_at', $currentYear)
-//            ->first();
 
         if ($existingRecord) {
 
@@ -277,25 +269,13 @@ class AnnualAppriasalCoreForm extends Component
             ]);
 
         try {
-            $userId = Auth::id();
-            $user = Auth::user();
             // Begin a database transaction
             \DB::beginTransaction();
 
             // Check if the user has already submitted a review for the current year
-            $existingRecord = AnnualAppriasalCore::where('appraisee_id', $userId)
+            $existingRecord = AnnualAppriasalCore::where('appraisee_id', $this->userId)
                 ->whereYear('created_at', now()->year)
                 ->first();
-
-            //Fetch user's appraisee
-            $appraiser = $user::where('department_id', $user->department_id)
-                ->where('user_type', 'Appraiser')
-                ->first();
-            if ($appraiser) {
-                $appraiserId = $appraiser->id;
-            } else {
-                session()->flash('error', 'You do not have appraiser');
-            }
 
             if ($existingRecord) {
                 // If a record for the current year exists, update it
@@ -331,8 +311,8 @@ class AnnualAppriasalCoreForm extends Component
             } else {
                 // If no record for the current year exists, create a new one
                 $annualAppriasalCore = AnnualAppriasalCore::create([
-                    'appraisee_id' => Auth::id(),
-                    'appraiser_id' => $appraiserId,
+                    'appraisee_id' => $this->userId,
+                    'appraiser_id' => Auth::id(),
                     'plan' => $this->plan,
                     'work' => $this->work,
                     'manage' => $this->manage,
@@ -366,16 +346,16 @@ class AnnualAppriasalCoreForm extends Component
             \DB::commit();
 
 
-            // Clear form input values
-            $this->plan = null;
-            $this->work = null;
-            $this->manage = null;
-            $this->change = null;
-            $this->creativity = null;
-            $this->thinking = null;
-            $this->direction = null;
-            $this->decision_making = null;
-            $this->judgment = null;
+//            // Clear form input values
+//            $this->plan = null;
+//            $this->work = null;
+//            $this->manage = null;
+//            $this->change = null;
+//            $this->creativity = null;
+//            $this->thinking = null;
+//            $this->direction = null;
+//            $this->decision_making = null;
+//            $this->judgment = null;
 
             session()->flash('success', 'Form submitted successfully.');
         }catch (\Exception $e) {

@@ -46,7 +46,7 @@
                                             @if ($editTargetMode)
                                                 <div>
                                                    <!-- Include the AddTarget component to allow adding new targets -->
-                                                    @livewire('appraisee.add-target', ['planId' => $editPlanId])
+                                                    @livewire('appraiser.add-target', ['planId' => $editPlanId])
                                                 </div>
                                             @endif
                                     </td>

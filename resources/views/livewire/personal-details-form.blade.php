@@ -1,7 +1,4 @@
 <div>
-    @include('appraisee.sidebar')
-
-    {{--    @if ($showForm)--}}
     <div class="md:hidden text-white ms-4">
         <i class="fas fa-arrow-left fixed bg-blue-500"><span class=" p-1 bg-blue-500 capitalize">Press Here</span></i>
     </div>
@@ -92,12 +89,6 @@
                             class="error text-red-600 block">{{ $message }}</span> @enderror
                     </label>
                 </div>
-                {{--                    <div class="form-group mt-5">--}}
-                {{--                        <label class="block">Department/Division:--}}
-                {{--                            <input type="text" class="form-input  w-full" wire:model="departmentDivision" >--}}
-                {{--                            @error('departmentDivision') <span class="error text-red-600 block">{{ $message }}</span> @enderror--}}
-                {{--                        </label>--}}
-                {{--                    </div>--}}
                 <div class="form-group mt-5">
                     <label class="block">Date of Appointment to Present Grade (dd/mm/yyyy):
                         <input type="date" class="form-input" wire:model="dateOfAppointment">
@@ -135,41 +126,6 @@
 
         </div>
     </div>
-    {{--    @endif--}}
-
-    {{--    Add training form section --}}
-    @livewire('training-records')
-
-
-
-
-    @livewire('performance-planning')
-
-
-
-    {{--    Mid year review--}}
-    @livewire('mid-year-review-form')
-
-    {{--End of year review--}}
-    @livewire('end-of-year-review-from')
-{{--    @include('forms.end-of-year-review')--}}
-
-    {{--    Annual appraisal--}}
-    @livewire('annual-appriasal-core-form')
-    @livewire('annual-appriasal-none-core-form')
-
-{{--Career developtment--}}
-    @include('forms.career-development')
-
-
-
-{{--  Assessment dercision--}}
-    @include('forms.assessment-decision')
-
-{{--    Appraisee comments--}}
-    @include('forms.appraisee-comments')
-
-
 
 </div>
 
